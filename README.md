@@ -6,11 +6,15 @@ This is me following the tutorial here http://bost.ocks.org/mike/map/ then proba
 
 ## Global dev dependencies
 * You'll need Node and npm installed.
-* You'll need Gulp installed (globally via npm).
-* topojson?
+* You'll need Gulp and TopoJSON (topojson) installed (globally via npm).
 * gdal?
 
 ## Usage
 * Clone the repo.
 * `npm install`.
+
+## Data sources
+* http://www.naturalearthdata.com/
+    * https://github.com/nvkelso/natural-earth-vector/blob/master/zips/10m_cultural/ne_10m_admin_0_map_subunits.zip
+    * https://github.com/nvkelso/natural-earth-vector/blob/master/zips/10m_cultural/ne_10m_populated_places.zip
 
