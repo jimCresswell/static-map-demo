@@ -1,0 +1,16 @@
+{
+  "name": "static-map-demo",
+  "version": "0.0.1",
+  "private": true,
+  "description": "A map of the UK",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jim Cresswell",
+  "license": "Whatever this is http://bost.ocks.org/mike/map/",
+  "devDependencies": {
+    "gulp": "~3.8.8",
+    "browser-sync": "~1.5.8"
+  }
+}
