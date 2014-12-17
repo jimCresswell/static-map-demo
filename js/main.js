@@ -73,7 +73,8 @@ d3.json("uk.json", function(error, uk) {
     .enter().append("text")
       .attr("class", function(d) { return "subunit-label " + d.id; })
       .attr("transform", function(d) { return "translate(" + path.centroid(d) + ")"; })
-      .attr("dy", ".35em")
+      .attr("dy", "-.5em")
+      .attr("dx", "-0.15em")
       .text(function(d) {
         return d.properties.name || d.properties.NAME;
       });
