@@ -21,11 +21,6 @@ d3.json("uk.json", function(error, uk) {
   var path = d3.geo.path()
       .projection(projection);
 
-  // Draw GB and IRE
-  svg.append("path")
-      .datum(subunits)
-      .attr("d", path);
-
   // Draw the individual countries as features.
   svg.selectAll(".subunit")
       .data(topojson.feature(uk, uk.objects.subunits).features)
