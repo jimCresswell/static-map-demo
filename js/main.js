@@ -66,6 +66,17 @@ d3.json("uk.json", function(error, uk) {
       .style("text-anchor", function(d) {
         return labelOnRight(d) ? "start" : "end";
       });
+
+  // Label the countries.
+  svg.selectAll(".subunit-label")
+      .data(topojson.feature(uk, uk.objects.subunits).features)
+    .enter().append("text")
+      .attr("class", function(d) { return "subunit-label " + d.id; })
+      .attr("transform", function(d) { return "translate(" + path.centroid(d) + ")"; })
+      .attr("dy", ".35em")
+      .text(function(d) {
+        return d.properties.name;
+      });
 });
 
 function labelOnRight(d) {
