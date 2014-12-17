@@ -30,4 +30,16 @@ d3.json("uk.json", function(error, uk) {
         return "subunit " + d.id;
       })
       .attr("d", path);
+
+  // Interior boundaries and not boundaries with Ireland.
+  svg.append("path")
+      .datum(topojson.mesh(uk, uk.objects.subunits, function(a, b) { return a !== b && a.id !== "IRL"; }))
+      .attr("d", path)
+      .attr("class", "subunit-boundary");
+
+  // Exterior boundary of Ireland.
+  svg.append("path")
+      .datum(topojson.mesh(uk, uk.objects.subunits, function(a, b) { return a === b && a.id === "IRL"; }))
+      .attr("d", path)
+      .attr("class", "subunit-boundary IRL");
 });
