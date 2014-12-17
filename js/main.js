@@ -1,6 +1,6 @@
 // iPad-ish dimensions.
 var width = 768,
-  height = 1024;
+  height = 1015;
 
 var svg = d3.select("body").append("svg")
   .attr("width", width)
@@ -26,7 +26,6 @@ d3.json("uk.json", function(error, uk) {
       .data(topojson.feature(uk, uk.objects.subunits).features)
     .enter().append("path")
       .attr("class", function(d) {
-        console.log(uk);
         return "subunit " + d.id;
       })
       .attr("d", path);
@@ -42,4 +41,41 @@ d3.json("uk.json", function(error, uk) {
       .datum(topojson.mesh(uk, uk.objects.subunits, function(a, b) { return a === b && a.id === "IRL"; }))
       .attr("d", path)
       .attr("class", "subunit-boundary IRL");
+
+  // Places.
+  path.pointRadius(5);
+  svg.append("path")
+      .datum(topojson.feature(uk, uk.objects.places))
+      .attr("d", path)
+      .attr("class", "place");
+
+  // Place names at location of places.
+  svg.selectAll(".place-label")
+      .data(topojson.feature(uk, uk.objects.places).features)
+    .enter().append("text")
+      .attr("class", "place-label")
+      .attr("transform", function(d) { return "translate(" + projection(d.geometry.coordinates) + ")"; })
+      .text(function(d) { return d.properties.name; });
+
+  // Tweak position place names.
+  svg.selectAll(".place-label")
+      .attr("x", function(d) {
+        return labelOnRight(d) ? 6 : -6;
+      })
+      .attr("dy", "-.3em")
+      .style("text-anchor", function(d) {
+        return labelOnRight(d) ? "start" : "end";
+      });
 });
+
+function labelOnRight(d) {
+  var triggerLong = -1.5;
+  var name = d.properties.name;
+  if (["Oxford", "Portsmouth"].indexOf(name) !== -1) {
+    return false;
+  }
+  if (["Belfast", "Edinburgh", "Dundee", "Manchester"].indexOf(name) !== -1) {
+    return true;
+  }
+  return d.geometry.coordinates[0] > triggerLong;
+}

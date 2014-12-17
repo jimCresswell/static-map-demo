@@ -19,3 +19,7 @@ svg {
 .subunit-boundary.IRL {
   stroke: #aaa;
 }
+
+.place-label {
+    font-size: 0.8em;
+}
