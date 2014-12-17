@@ -1,3 +1,8 @@
+html {
+    font-size: 16px;
+    font-family: 'Lato', sans-serif;
+}
+
 svg {
     display: block;
     margin: 0 auto;
@@ -21,13 +26,13 @@ svg {
 }
 
 .place-label {
-    font-size: 0.8em;
+    font-size: 0.7em;
 }
 
 .subunit-label {
   fill: #777;
-  fill-opacity: .5;
-  font-size: 1.4em;
+  fill-opacity: .6;
+  font-size: 1.2em;
   font-weight: 600;
   text-anchor: middle;
 }
