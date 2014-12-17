@@ -55,7 +55,7 @@ d3.json("uk.json", function(error, uk) {
     .enter().append("text")
       .attr("class", "place-label")
       .attr("transform", function(d) { return "translate(" + projection(d.geometry.coordinates) + ")"; })
-      .text(function(d) { return d.properties.name; });
+      .text(function(d) { return d.properties.name || d.properties.NAME; });
 
   // Tweak position place names.
   svg.selectAll(".place-label")
@@ -75,13 +75,13 @@ d3.json("uk.json", function(error, uk) {
       .attr("transform", function(d) { return "translate(" + path.centroid(d) + ")"; })
       .attr("dy", ".35em")
       .text(function(d) {
-        return d.properties.name;
+        return d.properties.name || d.properties.NAME;
       });
 });
 
 function labelOnRight(d) {
   var triggerLong = -1.5;
-  var name = d.properties.name;
+  var name = d.properties.name || d.properties.NAME;
   if (["Oxford", "Portsmouth"].indexOf(name) !== -1) {
     return false;
   }
