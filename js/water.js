@@ -43,6 +43,6 @@ var yScale = canvasWidth/textureWidth;
     enableMouseInteraction(waterModel, "waterHolder", xScale, yScale);
 
     var rainMaker = new RainMaker(textureWidth, textureheight, waterModel, raindrop, xScale, yScale);
-    rainMaker.start();
+    rainMaker.start(0.75);
   }
 })()
