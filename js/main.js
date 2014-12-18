@@ -1,10 +1,11 @@
-// iPad-ish dimensions.
-var width = 768,
-  height = 1015;
 
-var svg = d3.select("body").append("svg")
-  .attr("width", width)
-  .attr("height", height);
+
+var svg = d3.select("svg.map");
+
+var dimensions = svg.node().getBoundingClientRect();
+var width = dimensions.width;
+var height = dimensions.height;
+
 
 d3.json("uk.json", function(error, uk) {
   if (error) return console.error(error);
