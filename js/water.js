@@ -1,6 +1,10 @@
 (function() {
-var width = 255;
-var height = 340;
+var canvasWidth = 768;
+var canvasHeight = 1024;
+var textureWidth = 255;
+var textureheight = 340;
+var xScale = canvasHeight/textureheight;
+var yScale = canvasWidth/textureWidth;
 
   if (window.itsFinished) {
     init();
@@ -16,7 +20,7 @@ var height = 340;
     window.pixel = pixel;
     window.finger = finger;
 
-    var waterModel = new WaterModel(width, height, {
+    var waterModel = new WaterModel(textureWidth, textureheight, {
       resolution:3.0,
       interpolate:false,
       damping:0.985,
@@ -26,7 +30,7 @@ var height = 340;
       showStats:false
     });
 
-    var waterCanvas = new WaterCanvas(width, height,
+    var waterCanvas = new WaterCanvas(textureWidth, textureheight,
       "waterHolder", waterModel, {
         backgroundImageUrl:"images/water-255-340.png",
         lightRefraction:9.0,
@@ -35,6 +39,6 @@ var height = 340;
         showStats:false
     });
 
-    enableMouseInteraction(waterModel, "waterHolder");
+    enableMouseInteraction(waterModel, "waterHolder", xScale, yScale);
   }
 })()

@@ -631,19 +631,21 @@ WaterModel.prototype.resetSizeAndResolution = function(width, height, resolution
 /**
  * A class to mimic rain on the given waterModel with raindrop2dArray's as raindrops.
  */
-RainMaker = function(width, height, waterModel, raindrop2dArray) {
+RainMaker = function(width, height, waterModel, raindrop2dArray, xScale, yScale) {
     this.width = width;
     this.height = height;
     this.waterModel = waterModel;
     this.raindrop2dArray = raindrop2dArray;
+    this.xScale = xScale || 1;
+    this.yScale = yScale || 1;
 
     this.rainMinPressure = 1;
     this.rainMaxPressure = 3;
 }
 
 RainMaker.prototype.raindrop = function(){
-    var x = Math.floor(Math.random() * this.width);
-    var y = Math.floor(Math.random() * this.height);
+    var x = Math.floor(Math.random() * this.width)/xScale;
+    var y = Math.floor(Math.random() * this.height)/yScale;
     this.waterModel.touchWater(x, y, this.rainMinPressure + Math.random() * this.rainMaxPressure, this.raindrop2dArray);
 }
 
@@ -672,16 +674,25 @@ RainMaker.prototype.setRainMaxPressure = function(rainMaxPressure){
  * Enables mouse interactivity by adding event listeners to the given documentElement and
  * using the mouse coordinates to 'touch' the water.
  */
-function enableMouseInteraction(waterModel, documentElement){
+function enableMouseInteraction(waterModel, documentElement, xScale, yScale){
     var mouseDown = false;
+    var xScale = xScale || 1;
+    var yScale = yScale || 1;
 
     var canvasHolder = document.getElementById(documentElement);
 
+    function getX(e) {
+        return (e.clientX - canvasHolder.offsetLeft - canvasHolder.offsetParent.offsetLeft) + document.body.scrollLeft + document.documentElement.scrollLeft;
+    }
+    function getY(e) {
+        return (e.clientY - canvasHolder.offsetTop + canvasHolder.offsetParent.offsetTop) + document.body.scrollTop + document.documentElement.scrollTop;
+    }
+
     canvasHolder.addEventListener("mousedown", function(e){
         mouseDown = true;
-        var x = (e.clientX - canvasHolder.offsetLeft) + document.body.scrollLeft + document.documentElement.scrollLeft;
-        var y = (e.clientY - canvasHolder.offsetTop) + document.body.scrollTop + document.documentElement.scrollTop;
-        waterModel.touchWater(x, y, 1.5, mouseDown ? finger : pixel);
+        var x = getX(e);
+        var y = getY(e);
+        waterModel.touchWater(x/xScale, y/yScale, 1.5, mouseDown ? finger : pixel);
     }, false);
 
     canvasHolder.addEventListener("mouseup", function(e){
@@ -689,10 +700,10 @@ function enableMouseInteraction(waterModel, documentElement){
     }, false);
 
     canvasHolder.addEventListener("mousemove", function(e){
-        var x = (e.clientX - canvasHolder.offsetLeft) + document.body.scrollLeft + document.documentElement.scrollLeft;
-        var y = (e.clientY - canvasHolder.offsetTop) + document.body.scrollTop + document.documentElement.scrollTop;
+        var x = getX(e);
+        var y = getY(e);
         // mozPressure: https://developer.mozilla.org/en/DOM/Event/UIEvent/MouseEvent
-        waterModel.touchWater(x, y, 1.5, mouseDown ? finger : pixel);
+        waterModel.touchWater(x/xScale, y/yScale, 1.5, mouseDown ? finger : pixel);
     }, false);
 }
 
