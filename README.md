@@ -18,3 +18,4 @@ This is me following the tutorial here http://bost.ocks.org/mike/map/ then proba
     * https://github.com/nvkelso/natural-earth-vector/blob/master/zips/10m_cultural/ne_10m_admin_0_map_subunits.zip
     * https://github.com/nvkelso/natural-earth-vector/blob/master/zips/10m_cultural/ne_10m_populated_places.zip
 
+Water effects modified from the code in this blog http://code.almeros.com/water-ripple-canvas-and-javascript.
