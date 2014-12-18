@@ -631,34 +631,31 @@ WaterModel.prototype.resetSizeAndResolution = function(width, height, resolution
 /**
  * A class to mimic rain on the given waterModel with raindrop2dArray's as raindrops.
  */
-RainMaker = function(width, height, waterModel, raindrop2dArray, xScale, yScale) {
+RainMaker = function(width, height, waterModel, raindrop2dArray) {
     this.width = width;
     this.height = height;
     this.waterModel = waterModel;
     this.raindrop2dArray = raindrop2dArray;
-    this.xScale = xScale || 1;
-    this.yScale = yScale || 1;
 
     this.rainMinPressure = 1;
     this.rainMaxPressure = 3;
 }
 
 RainMaker.prototype.raindrop = function(){
-    var x = Math.floor(Math.random() * this.width)/xScale;
-    var y = Math.floor(Math.random() * this.height)/yScale;
+    var x = Math.floor(Math.random() * this.width);
+    var y = Math.floor(Math.random() * this.height);
     this.waterModel.touchWater(x, y, this.rainMinPressure + Math.random() * this.rainMaxPressure, this.raindrop2dArray);
 }
 
-RainMaker.prototype.setRaindropsPerSecond = function(rps){
-    this.rps = rps;
+RainMaker.prototype.start = function(rps) {
+    var self = this;
+    rps = rps || 1.0;
 
     clearInterval(this.rainInterval);
-
-    if(this.rps>0) {
-        var self = this;
+    if(rps>0) {
         this.rainInterval = setInterval(function(){
             self.raindrop();
-        }, 1000/this.rps);
+        }, 1000/rps);
     }
 }
 

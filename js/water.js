@@ -16,13 +16,14 @@ var yScale = canvasWidth/textureWidth;
   function init(){
     var pixel     = create2DArray(createRadialCanvas(2,2));
     var finger    = create2DArray(createRadialCanvas(14,14));
+    var raindrop  = create2DArray(createRadialCanvas(4,4));
 
     window.pixel = pixel;
     window.finger = finger;
 
     var waterModel = new WaterModel(textureWidth, textureheight, {
-      resolution:3.0,
-      interpolate:false,
+      resolution:4.0,
+      interpolate:true,
       damping:0.985,
       clipping:5,
       evolveThreshold:0.05,
@@ -40,5 +41,8 @@ var yScale = canvasWidth/textureWidth;
     });
 
     enableMouseInteraction(waterModel, "waterHolder", xScale, yScale);
+
+    var rainMaker = new RainMaker(textureWidth, textureheight, waterModel, raindrop, xScale, yScale);
+    rainMaker.start();
   }
 })()
