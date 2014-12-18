@@ -44,5 +44,15 @@ var yScale = canvasWidth/textureWidth;
 
     var rainMaker = new RainMaker(textureWidth, textureheight, waterModel, raindrop, xScale, yScale);
     rainMaker.start(0.75);
+
+    stopButton = window.document.getElementById("stopButton");
+    stopButton.addEventListener('click', function(){
+      rainMaker.stop();
+      waterModel.evolving = false;
+      waterModel.touchWater = function(){};
+      waterCanvas.drawNextFrame= function(){};
+      waterCanvas.canvas.parentNode.removeChild(waterCanvas.canvas);
+      this.parentNode.removeChild(this);
+    });
   }
 })()

@@ -659,6 +659,10 @@ RainMaker.prototype.start = function(rps) {
     }
 }
 
+RainMaker.prototype.stop = function() {
+    clearInterval(this.rainInterval);
+}
+
 RainMaker.prototype.setRainMinPressure = function(rainMinPressure){
     this.rainMinPressure = rainMinPressure;
 }

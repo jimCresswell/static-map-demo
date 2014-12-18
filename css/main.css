@@ -27,11 +27,22 @@ body {
 div.background {
   width: 100%;
   height: 100%;
+  background-color: lightblue;
 }
 
 div.background > canvas {
   width: 100%;
   height: 100%;
+}
+
+button.stop {
+  position: absolute;
+  top: 0;
+  background-color: darkorange;
+  color: white;
+  font-size: 2em;
+  padding: 0.2em;
+  margin: 0.5em;
 }
 
 svg.map {
