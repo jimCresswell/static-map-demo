@@ -2,7 +2,7 @@
 
 http://jimcresswell.net/static-map-demo
 
-This is me following the tutorial here http://bost.ocks.org/mike/map/ then probably playing with it a bit.
+D3/SVG map of the UK with an interactive canvas background. Started like as following this tutorial http://bost.ocks.org/mike/map/.
 
 ## Global dev dependencies
 * You'll need Node and npm installed.
